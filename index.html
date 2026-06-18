@@ -1,178 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Apna Portal Pro Max</title>
+<div class="products">
 
-  <style>
-    body {
-      font-family: Arial;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-    }
-
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      margin: 20px auto;
-      width: 320px;
-      border-radius: 10px;
-    }
-
-    input, button {
-      width: 90%;
-      padding: 10px;
-      margin: 5px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      background: #22c55e;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .delete {
-      background: red;
-      width: auto;
-      padding: 5px;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
-
-</head>
-<body>
-
-<!-- LOGIN -->
-<div class="card" id="loginCard">
-  <h2>Login 🔐</h2>
-  <input id="loginId" placeholder="ID">
-  <input id="loginPin" placeholder="PIN">
-  <button onclick="login()">Login</button>
+<div class="card">
+  <img src="https://via.placeholder.com/200">
+  <h3>Product 1</h3>
+  <p>High quality product</p>
+  <div class="price">₹3000</div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div class="card hidden" id="adminPanel">
-  <h2>Admin Panel 👑</h2>
-
-  <p>Total Agents: <span id="count">0</span></p>
-
-  <input id="agentId" placeholder="Agent ID">
-  <input id="agentPin" placeholder="PIN">
-  <input id="agentName" placeholder="Name">
-  <input id="agentWork" placeholder="Work">
-  <button onclick="saveAgent()">Add Agent</button>
-
-  <h3>Agent List 📋</h3>
-  <ul id="list"></ul>
-
-  <button onclick="logout()">Logout</button>
+<div class="card">
+  <img src="https://via.placeholder.com/200">
+  <h3>Product 2</h3>
+  <p>Best for daily use</p>
+  <div class="price">₹2500</div>
 </div>
 
-<!-- AGENT PANEL -->
-<div class="card hidden" id="agentPanel">
-  <h2>Agent Dashboard 📊</h2>
-  <p id="agentInfo"></p>
-  <button onclick="logout()">Logout</button>
+<div class="card">
+  <img src="https://via.placeholder.com/200">
+  <h3>Product 3</h3>
+  <p>Premium quality</p>
+  <div class="price">₹4000</div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-  getFirestore, collection, addDoc, getDocs, query, where, deleteDoc, doc 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBvogRQajkHtbiDS0bZNUBtBHTS44CBPr4",
-  authDomain: "apna-enterprises-c0f29.firebaseapp.com",
-  projectId: "apna-enterprises-c0f29",
-  storageBucket: "apna-enterprises-c0f29.firebasestorage.app",
-  messagingSenderId: "284701183734",
-  appId: "1:284701183734:web:6323898448e51540e726d7"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const ADMIN_ID = "admin";
-const ADMIN_PIN = "9999";
-
-// LOGIN
-window.login = async function () {
-  let id = loginId.value;
-  let pin = loginPin.value;
-
-  if (id === ADMIN_ID && pin === ADMIN_PIN) {
-    loginCard.classList.add("hidden");
-    adminPanel.classList.remove("hidden");
-    loadAgents();
-    return;
-  }
-
-  const q = query(
-    collection(db, "agents"),
-    where("id", "==", id),
-    where("pin", "==", pin)
-  );
-
-  const res = await getDocs(q);
-
-  if (!res.empty) {
-    let user = res.docs[0].data();
-    loginCard.classList.add("hidden");
-    agentPanel.classList.remove("hidden");
-    agentInfo.innerText = "Welcome " + user.name + " (" + user.work + ")";
-  } else {
-    alert("Wrong ❌");
-  }
-};
-
-// ADD AGENT
-window.saveAgent = async function () {
-  await addDoc(collection(db, "agents"), {
-    id: agentId.value,
-    pin: agentPin.value,
-    name: agentName.value,
-    work: agentWork.value
-  });
-  loadAgents();
-};
-
-// LOAD AGENTS
-async function loadAgents() {
-  list.innerHTML = "";
-  const snap = await getDocs(collection(db, "agents"));
-
-  count.innerText = snap.size;
-
-  snap.forEach(docu => {
-    let a = docu.data();
-
-    list.innerHTML += `
-      <li>
-        ${a.name} (${a.work})
-        <button class="delete" onclick="deleteAgent('${docu.id}')">X</button>
-      </li>
-    `;
-  });
-}
-
-// DELETE
-window.deleteAgent = async function (id) {
-  await deleteDoc(doc(db, "agents", id));
-  loadAgents();
-};
-
-// LOGOUT
-window.logout = function () {
-  location.reload();
-};
-</script>
-
-</body>
-</html>
+</div>
