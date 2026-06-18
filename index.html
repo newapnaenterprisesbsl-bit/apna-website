@@ -6,6 +6,7 @@
   <style>
     body { font-family: Arial; margin:0; background:#f5f5f5; text-align:center; }
     header { background:black; color:white; padding:20px; font-size:24px; }
+
     .container { padding:20px; }
 
     .services {
@@ -58,11 +59,12 @@
 <div class="container">
 
   <h2>Our Services</h2>
-
   <div class="services" id="services"></div>
 
   <h2>Upload Your Document</h2>
 
+  <input type="text" id="name" placeholder="Your Name">
+  <br>
   <input type="file" id="file">
   <br>
   <button class="btn" onclick="sendWhatsApp()">Submit</button>
@@ -90,7 +92,11 @@ services.forEach(s => {
 document.getElementById("services").innerHTML = html;
 
 function sendWhatsApp(){
-  window.open("https://wa.me/919876543210?text=I want to upload document");
+  let name = document.getElementById("name").value;
+
+  let msg = `Name: ${name} \nI want to upload document`;
+
+  window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`);
 }
 </script>
 
