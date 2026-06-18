@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    body { font-family: Arial; padding:20px; background:#f4f4f4; }
+    input, button { padding:10px; margin:5px; }
+    .card { background:white; padding:10px; margin:10px 0; border-radius:10px; }
+  </style>
+</head>
+
+<body>
+
+<h1>Admin Panel</h1>
+
+<input type="text" id="name" placeholder="Service Name">
+<input type="text" id="desc" placeholder="Description">
+<button onclick="add()">Add Service</button>
+
+<h2>Services</h2>
+<div id="list"></div>
+
+<script>
+let services = JSON.parse(localStorage.getItem("services")) || [];
+
+function show(){
+  let html = "";
+  services.forEach((s,i)=>{
+    html += `
+      <div class="card">
+        <h3>${s.name}</h3>
+        <p>${s.desc}</p>
+        <button onclick="del(${i})">Delete</button>
+      </div>
+    `;
+  });
+  document.getElementById("list").innerHTML = html;
+}
+
+function add(){
+  let s = {
+    name: document.getElementById("name").value,
+    desc: document.getElementById("desc").value
+  };
+  services.push(s);
+  localStorage.setItem("services", JSON.stringify(services));
+  show();
+}
+
+function del(i){
+  services.splice(i,1);
+  localStorage.setItem("services", JSON.stringify(services));
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
