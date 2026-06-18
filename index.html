@@ -4,23 +4,9 @@
   <title>Apna Enterprises</title>
 
   <style>
-    body {
-      font-family: Arial;
-      margin:0;
-      background:#f5f5f5;
-      text-align:center;
-    }
-
-    header {
-      background:black;
-      color:white;
-      padding:20px;
-      font-size:24px;
-    }
-
-    .container {
-      padding:20px;
-    }
+    body { font-family: Arial; margin:0; background:#f5f5f5; text-align:center; }
+    header { background:black; color:white; padding:20px; font-size:24px; }
+    .container { padding:20px; }
 
     .services {
       display:flex;
@@ -37,23 +23,16 @@
       box-shadow:0 0 10px rgba(0,0,0,0.1);
     }
 
-    .btn {
-      margin-top:10px;
+    input, button {
       padding:10px;
+      margin:10px;
+    }
+
+    .btn {
       background:black;
       color:white;
       border:none;
-      cursor:pointer;
       border-radius:5px;
-    }
-
-    .upload {
-      margin-top:20px;
-    }
-
-    input {
-      padding:10px;
-      margin:10px;
     }
 
     .whatsapp {
@@ -68,7 +47,6 @@
       font-size:20px;
     }
   </style>
-
 </head>
 
 <body>
@@ -81,39 +59,40 @@
 
   <h2>Our Services</h2>
 
-  <div class="services">
+  <div class="services" id="services"></div>
 
-    <div class="card">
-      <h3>PAN Card Service</h3>
-      <p>Apply or update PAN Card</p>
-    </div>
+  <h2>Upload Your Document</h2>
 
-    <div class="card">
-      <h3>Aadhar Update</h3>
-      <p>Correction & Update service</p>
-    </div>
+  <input type="file" id="file">
+  <br>
+  <button class="btn" onclick="sendWhatsApp()">Submit</button>
 
-    <div class="card">
-      <h3>Online Form Fill</h3>
-      <p>All government forms available</p>
-    </div>
-
-  </div>
-
-  <h2>Upload Your Documents</h2>
-
-  <div class="upload">
-    <input type="file">
-    <br>
-    <button class="btn">Submit</button>
-  </div>
-
-  <h2>Contact Us</h2>
-  <p>Phone: 9876543210</p>
+  <h2>Contact</h2>
+  <p>9876543210</p>
 
 </div>
 
 <a class="whatsapp" href="https://wa.me/919876543210">💬</a>
+
+<script>
+let services = JSON.parse(localStorage.getItem("services")) || [];
+
+let html = "";
+services.forEach(s => {
+  html += `
+    <div class="card">
+      <h3>${s.name}</h3>
+      <p>${s.desc}</p>
+    </div>
+  `;
+});
+
+document.getElementById("services").innerHTML = html;
+
+function sendWhatsApp(){
+  window.open("https://wa.me/919876543210?text=I want to upload document");
+}
+</script>
 
 </body>
 </html>
