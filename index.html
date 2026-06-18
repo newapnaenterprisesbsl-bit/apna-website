@@ -1,24 +1,58 @@
-<div class="products">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Apna Enterprises</title>
+  <style>
+    body { font-family: Arial; margin:0; padding:0; text-align:center; }
+    header { background:black; color:white; padding:15px; }
+    .container { padding:20px; }
+    .products { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+    .card { border:1px solid #ddd; padding:15px; width:250px; border-radius:10px; }
+    .card img { width:100%; border-radius:10px; }
+    .price { color:green; font-size:20px; }
+    .whatsapp { position:fixed; bottom:20px; right:20px; background:green; color:white; padding:15px; border-radius:50%; text-decoration:none; }
+  </style>
+</head>
 
-<div class="card">
-  <img src="https://via.placeholder.com/200">
-  <h3>Product 1</h3>
-  <p>High quality product</p>
-  <div class="price">₹3000</div>
+<body>
+
+<header>
+  <h1>Apna Enterprises</h1>
+</header>
+
+<div class="container">
+  <h2>Our Products</h2>
+
+  <div class="products">
+
+    <div class="card">
+      <img src="https://picsum.photos/200?1">
+      <h3>Product 1</h3>
+      <p>High quality product</p>
+      <div class="price">₹3000</div>
+    </div>
+
+    <div class="card">
+      <img src="https://picsum.photos/200?2">
+      <h3>Product 2</h3>
+      <p>Best for daily use</p>
+      <div class="price">₹2500</div>
+    </div>
+
+    <div class="card">
+      <img src="https://picsum.photos/200?3">
+      <h3>Product 3</h3>
+      <p>Premium quality</p>
+      <div class="price">₹4000</div>
+    </div>
+
+  </div>
+
+  <h2>Contact Us</h2>
+  <p>Phone: 9876543210</p>
 </div>
 
-<div class="card">
-  <img src="https://via.placeholder.com/200">
-  <h3>Product 2</h3>
-  <p>Best for daily use</p>
-  <div class="price">₹2500</div>
-</div>
+<a class="whatsapp" href="https://wa.me/919876543210">💬</a>
 
-<div class="card">
-  <img src="https://via.placeholder.com/200">
-  <h3>Product 3</h3>
-  <p>Premium quality</p>
-  <div class="price">₹4000</div>
-</div>
-
-</div>
+</body>
+</html>
